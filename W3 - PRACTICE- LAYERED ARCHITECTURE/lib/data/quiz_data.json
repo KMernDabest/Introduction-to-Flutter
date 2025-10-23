@@ -1,0 +1,71 @@
+{
+  "title": "Sample Quiz (from JSON)",
+  "questions": [
+    {
+      "id": "q-1",
+      "title": "Capital of France?",
+      "choices": [
+        "Paris",
+        "London",
+        "Rome"
+      ],
+      "goodChoice": "Paris",
+      "points": 10
+    },
+    {
+      "id": "q-2",
+      "title": "2 + 2 = ?",
+      "choices": [
+        "2",
+        "4",
+        "5"
+      ],
+      "goodChoice": "4",
+      "points": 10
+    }
+  ],
+  "submissions": [
+    {
+      "playerName": "KMern",
+      "scorePercent": 100,
+      "answers": [
+        {
+          "questionId": "q-1",
+          "answerChoice": "Paris"
+        },
+        {
+          "questionId": "q-2",
+          "answerChoice": "4"
+        }
+      ]
+    },
+    {
+      "playerName": "DoggyFat",
+      "scorePercent": 0,
+      "answers": [
+        {
+          "questionId": "q-1",
+          "answerChoice": "Rome"
+        },
+        {
+          "questionId": "q-2",
+          "answerChoice": "5"
+        }
+      ]
+    },
+    {
+      "playerName": "Ronan",
+      "scorePercent": 100,
+      "answers": [
+        {
+          "questionId": "q-1",
+          "answerChoice": "Paris"
+        },
+        {
+          "questionId": "q-2",
+          "answerChoice": "4"
+        }
+      ]
+    }
+  ]
+}
