@@ -38,7 +38,7 @@ class PlayerSubmission{
 
 class Quiz{
   List<Question> questions;
-  List <Answer> answers =[];
+  List<Answer> answers = [];
   final String title;
   List<PlayerSubmission> submissions = [];
 
