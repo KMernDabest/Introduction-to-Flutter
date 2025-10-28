@@ -38,7 +38,6 @@ class PlayerSubmission{
 
 class Quiz{
   List<Question> questions;
-  List<Answer> answers = [];
   final String title;
   List<PlayerSubmission> submissions = [];
 
@@ -48,17 +47,9 @@ class Quiz{
     return questions.firstWhere((q) => q.id == id);
   }
 
-  void addAnswer(Answer answer) {
-    this.answers.add(answer);
-  }
-
-  void clearAnswers() {
-    this.answers.clear();
-  }
-
   int totalPoints() => questions.fold(0, (sum, question) => sum + question.points);
 
-  int getEarnedPoints() {
+  int getEarnedPoints(List<Answer> answers) {
     int earned = 0;
     for (var a in answers) {
       try {
@@ -73,15 +64,15 @@ class Quiz{
     return earned;
   }
 
-  int getScoreInPercentage(){
+  int getScoreInPercentage(List<Answer> answers) {
     int total = totalPoints();
     if (total == 0) return 0;
-    final earned = getEarnedPoints();
+    final earned = getEarnedPoints(answers);
     return ((earned / total) * 100).toInt();
   }
 
-  void addSubmission(String playerName) {
-    final pct = getScoreInPercentage();
+  void addSubmission(String playerName, List<Answer> answers) {
+    final pct = getScoreInPercentage(answers);
     submissions.removeWhere((s) => s.playerName == playerName);
     submissions.insert(
       0,

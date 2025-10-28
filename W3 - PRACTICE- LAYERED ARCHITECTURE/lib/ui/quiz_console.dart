@@ -21,7 +21,7 @@ class QuizConsole {
         break;
       }
 
-      quiz.clearAnswers();
+      final List<Answer> answers = [];
       print('\nHello, $playerName — starting the quiz.\n');
 
       for (var q in quiz.questions) {
@@ -49,14 +49,14 @@ class QuizConsole {
           }
         }
 
-        quiz.addAnswer(Answer(questionId: q.id, answerChoice: chosenText));
+        answers.add(Answer(questionId: q.id, answerChoice: chosenText));
         print('');
       }
 
-      final earned = quiz.getEarnedPoints();
-      final pct = quiz.getScoreInPercentage();
+      final earned = quiz.getEarnedPoints(answers);
+      final pct = quiz.getScoreInPercentage(answers);
 
-      quiz.addSubmission(playerName);
+      quiz.addSubmission(playerName, answers);
       repo.saveQuiz(quiz); // 🔥 persist submission
 
       print('--- Result for $playerName ---');

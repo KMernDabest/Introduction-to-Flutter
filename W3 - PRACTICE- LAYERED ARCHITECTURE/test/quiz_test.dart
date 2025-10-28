@@ -1,5 +1,4 @@
 import 'package:test/test.dart';
-// import 'package:uuid/uuid.dart';
 import '../lib/domain/quiz.dart';
 
 main() {
@@ -27,41 +26,43 @@ main() {
     );
 
     test('Score 100% when all answers are correct', () {
-      quiz.clearAnswers();
-      quiz.addAnswer(Answer(questionId: 'q-1', answerChoice: 'Paris'));
-      quiz.addAnswer(Answer(questionId: 'q-2', answerChoice: '4'));
+      final answers = [
+        Answer(questionId: 'q-1', answerChoice: 'Paris'),
+        Answer(questionId: 'q-2', answerChoice: '4'),
+      ];
 
-      final earnedPoints = quiz.getEarnedPoints();
-      final pct = quiz.getScoreInPercentage();
+      final earnedPoints = quiz.getEarnedPoints(answers);
+      final pct = quiz.getScoreInPercentage(answers);
 
       expect(earnedPoints, equals(20)); // 10 + 10
       expect(pct, equals(100));
     });
 
     test('Score 50% when one answer is correct', () {
-      quiz.clearAnswers();
-      quiz.addAnswer(Answer(questionId: 'q-1', answerChoice: 'Paris'));
-      quiz.addAnswer(Answer(questionId: 'q-2', answerChoice: '5'));
+      final answers = [
+        Answer(questionId: 'q-1', answerChoice: 'Paris'),
+        Answer(questionId: 'q-2', answerChoice: '5'),
+      ];
 
-      final earnedPoints = quiz.getEarnedPoints();
-      final pct = quiz.getScoreInPercentage();
+      final earnedPoints = quiz.getEarnedPoints(answers);
+      final pct = quiz.getScoreInPercentage(answers);
 
       expect(earnedPoints, equals(10)); // 1 correct = 10 pts
       expect(pct, equals(50)); // 10/20 = 50%
     });
 
     test('Adding player submissions works', () {
-      // Ronan plays first
-      quiz.clearAnswers();
-      quiz.addAnswer(Answer(questionId: 'q-1', answerChoice: 'Paris'));
-      quiz.addAnswer(Answer(questionId: 'q-2', answerChoice: '4'));
-      quiz.addSubmission('Ronan');
+      final ronanAnswers = [
+        Answer(questionId: 'q-1', answerChoice: 'Paris'),
+        Answer(questionId: 'q-2', answerChoice: '4'),
+      ];
+      quiz.addSubmission('Ronan', ronanAnswers);
 
-      // DoggyFat plays next
-      quiz.clearAnswers();
-      quiz.addAnswer(Answer(questionId: 'q-1', answerChoice: 'London'));
-      quiz.addAnswer(Answer(questionId: 'q-2', answerChoice: '4'));
-      quiz.addSubmission('DoggyFat');
+      final doggyAnswers = [
+        Answer(questionId: 'q-1', answerChoice: 'London'),
+        Answer(questionId: 'q-2', answerChoice: '4'),
+      ];
+      quiz.addSubmission('DoggyFat', doggyAnswers);
 
       expect(quiz.submissions.length, equals(2));
       expect(quiz.submissions[0].playerName, equals('DoggyFat'));
